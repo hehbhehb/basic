@@ -21,7 +21,7 @@ DIRECTORY STRUCTURE
 REQUIREMENTS
 ------------
 
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+the enviroment should support Yii2, for the project is based on Yii2.
 
 
 INSTALLATION
@@ -54,7 +54,7 @@ CONFIGURATION
 
 1. CREATE DATABASE basic;
 
-**NOTE:** Yii won't create the database for you, this has to be done MANUALLY before you can access it.
+**NOTE:** this project won't create the database for you, this has to be done MANUALLY before you can access it.
 
 2. Edit the file `config/db.php` with real data, for example:
 
@@ -68,13 +68,13 @@ return [
 ];
 ```
 
-3. php yii migrate
+3. php yii migrate, to create some tables and relation tables
 
 4. http://localhost/basic/web/
 
 
-TODO:
-1. Add the book into library
+### TODO:
+1. Add books into library
 
 
 Enjoy it!
