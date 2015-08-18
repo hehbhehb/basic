@@ -53,6 +53,7 @@ CONFIGURATION
 ### Database
 
 1. CREATE DATABASE basic;
+
 **NOTE:** Yii won't create the database for you, this has to be done MANUALLY before you can access it.
 
 2. Edit the file `config/db.php` with real data, for example:
