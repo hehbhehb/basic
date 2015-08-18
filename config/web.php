@@ -41,8 +41,8 @@ $config = [
 
         'urlManager' => [
             'enablePrettyUrl' => true,
-            // if set showScriptName = true, you should modify the .htaccess file for the apache web server or nginx.conf for nginx server.
-            //'showScriptName'=> false,
+            // if set showScriptName = true, a .htaccess file MUST be placed under basic/web/  for the apache web server, how about nginx server?
+            'showScriptName'=> false,
             'rules' => [
                 '<controller:\w+>s' => '<controller>/index',
                 '<controller:\w+>/update/<id:\d+>'    => '<controller>/update',

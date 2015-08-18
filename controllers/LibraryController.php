@@ -49,15 +49,28 @@ class LibraryController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        $books = $model->books;
+        $book_ids = [];
+        foreach($books as $book) {
+            $book_ids[] = $book->book_id;
+        }
+
+        $searchModel = new \app\models\BookSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andFilterWhere(['book_id' => $book_ids]);
+        
         $book = new \app\models\Book();
         if ($book->load(Yii::$app->request->post())) {
-            if ($model->appendBook($book)) {
-                $book = new \app\models\Book();
+            if ($model->insertBook($book)) {
+                $this->refresh();
+//                $book = new \app\models\Book();
             }
         }
         
         return $this->render('view', [
             'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
             'book' => $book,            
         ]);
     }
@@ -69,7 +82,7 @@ class LibraryController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Library();
+        $model = new \app\models\Library();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->library_id]);

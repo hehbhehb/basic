@@ -30,7 +30,7 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'pages_amount'], 'required'],
-            [['author_id'], 'integer'],
+            [['author_id', 'book_id'], 'integer'],
             [['pages_amount'], 'integer', 'min'=>1],            
             [['publication'], 'date', 'format'=>'yyyy-MM-dd'],
             [['name'], 'string', 'max' => 255],
@@ -56,5 +56,17 @@ class Book extends \yii\db\ActiveRecord
         return $this->hasOne(Author::className(), ['author_id' => 'author_id']);
     }
 
+    public function getRelLibraryBooks()
+    {
+        return $this->hasMany(\app\models\RelLibraryBook::className(), ['book_id' => 'book_id']);
+    }
+
+     public function afterDelete()
+     {
+          foreach($this->relLibraryBooks as $relLibraryBook) {
+               $relLibraryBook->delete();
+          }
+          parent::afterDelete();
+     }
     
 }

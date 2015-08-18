@@ -27,7 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'library_id',
             'name',
-
+            [
+                'label' => 'Books Amount',
+                'value' => function ($model, $key, $index, $column) {
+                    return empty($model->books) ? '' : count($model->books);
+                },
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

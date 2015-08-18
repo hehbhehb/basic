@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Library */
@@ -34,3 +36,49 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<div class="mstudent-course-index">
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            'book_id', 
+            'name', 
+/*    
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{delete}'],    
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{delete}'
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    $params = ['id' => $model->book_id];
+                    $params[0] = 'book' . '/' . $action;
+                    return Url::toRoute($params);
+                },            
+            ],
+*/            
+        ],
+    ]); ?>
+
+</div>
+
+<div class="mgroup-student-form">
+
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($book, 'book_id')->dropDownList(\yii\helpers\ArrayHelper::map(
+        \app\models\Book::find()->all(),
+        'book_id',
+        'name'
+    ), ['prompt'=>'']) ?>
+
+
+	<div class="form-group">
+        <?= Html::submitButton('Insert Book', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
+
+
+
