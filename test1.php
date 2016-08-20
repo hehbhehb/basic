@@ -1,1 +1,2 @@
-this is test1.php
+<?php
+die('hello, world');
